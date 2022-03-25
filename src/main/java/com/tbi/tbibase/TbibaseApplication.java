@@ -1,7 +1,9 @@
 package com.tbi.tbibase;
 
+import com.tbi.tbibase.entities.JobFinal;
 import com.tbi.tbibase.entities.JobStart;
 import com.tbi.tbibase.entities.Well;
+import com.tbi.tbibase.repository.JobFinalRepository;
 import com.tbi.tbibase.repository.JobStartRepository;
 import com.tbi.tbibase.repository.WellRepository;
 import org.springframework.boot.SpringApplication;
@@ -18,17 +20,30 @@ public class TbibaseApplication {
 
         ConfigurableApplicationContext context = SpringApplication.run(TbibaseApplication.class);
 
-        WellRepository repository = context.getBean(WellRepository.class);
-//        Well well1 = new Well("field", "pad", "well", new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-//                "customer", "directory");
-//        repository.save(well1);
-        Well well = repository.getById(1L);
+        WellRepository repositoryWell = context.getBean(WellRepository.class);
+        JobStartRepository repositoryJobStart = context.getBean(JobStartRepository.class);
+        JobFinalRepository repositoryJobFinal = context.getBean(JobFinalRepository.class);
 
-        JobStartRepository repository1 = context.getBean(JobStartRepository.class);
-        repository1.save(new JobStart(1, new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                450, "operator1", well));
+        Well well = new Well("field", "pad", "well", new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
+                "customer", "directory");
+        System.out.println(well);
+        JobStart jobStart = new JobStart(1, new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
+                450, "operator1", well);
+        System.out.println(jobStart);
+        JobFinal jobFinal = new JobFinal(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
+                1000, new Time(System.currentTimeMillis()), "40-65", "1350-2900",
+                65, 51, "norm", jobStart, well);
 
-//		repository.deleteAll();
+        repositoryWell.save(well);
+        System.out.println(well);
+
+        repositoryJobStart.save(jobStart);
+        System.out.println(jobStart);
+
+        System.out.println(jobFinal);
+        repositoryJobFinal.save(jobFinal);
+        System.out.println(jobFinal);
+
         context.close();
     }
 

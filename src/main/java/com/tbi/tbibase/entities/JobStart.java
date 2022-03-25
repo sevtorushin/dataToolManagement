@@ -27,10 +27,14 @@ public class JobStart {
     @JoinColumn(name = "WELL_ID")
     private Well well;
 
+    @OneToOne(mappedBy = "jobStart", cascade = CascadeType.ALL)
+    private JobFinal jobFinal;
+
     public JobStart() {
     }
 
-    public JobStart(int jobNumber, Date startDateOfJob, Time startTimeOfJob, int startDepth, String operator, Well well) {
+    public JobStart(int jobNumber, Date startDateOfJob, Time startTimeOfJob,
+                    int startDepth, String operator, Well well) {
         this.jobNumber = jobNumber;
         this.startDateOfJob = startDateOfJob;
         this.startTimeOfJob = startTimeOfJob;

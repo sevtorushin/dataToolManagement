@@ -25,8 +25,12 @@ public class Well {
     private Time time;
     private String customer;
     private String workingDirectory;
+
     @OneToMany(mappedBy = "well", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<JobStart> jobStarts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "well", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<JobFinal> jobFinals = new ArrayList<>();
 
     public Well() {
     }
