@@ -6,6 +6,9 @@ import com.tbi.tbibase.entities.Well;
 import com.tbi.tbibase.repository.JobFinalRepository;
 import com.tbi.tbibase.repository.JobStartRepository;
 import com.tbi.tbibase.repository.WellRepository;
+import com.tbi.tbibase.services.JobFinalService;
+import com.tbi.tbibase.services.JobStartService;
+import com.tbi.tbibase.services.WellService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,29 +23,22 @@ public class TbibaseApplication {
 
         ConfigurableApplicationContext context = SpringApplication.run(TbibaseApplication.class);
 
-        WellRepository repositoryWell = context.getBean(WellRepository.class);
-        JobStartRepository repositoryJobStart = context.getBean(JobStartRepository.class);
-        JobFinalRepository repositoryJobFinal = context.getBean(JobFinalRepository.class);
+        WellRepository wellRepository = context.getBean(WellRepository.class);
+        JobStartRepository jobStartRepository = context.getBean(JobStartRepository.class);
+        JobFinalRepository jobFinalRepository = context.getBean(JobFinalRepository.class);
+        JobStartService jobStartService = context.getBean(JobStartService.class);
+        JobFinalService jobFinalService = context.getBean(JobFinalService.class);
+        WellService wellService = context.getBean(WellService.class);
 
-        Well well = new Well("field", "pad", "well", new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                "customer", "directory");
-        System.out.println(well);
-        JobStart jobStart = new JobStart(1, new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                450, "operator1", well);
-        System.out.println(jobStart);
-        JobFinal jobFinal = new JobFinal(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                1000, new Time(System.currentTimeMillis()), "40-65", "1350-2900",
-                65, 51, "norm", jobStart, well);
+        Well well = wellService.createWell();
+        JobStart jobStart = jobStartService.createJob();
+        JobFinal jobFinal = jobFinalService.createJob();
 
-        repositoryWell.save(well);
-        System.out.println(well);
+        wellRepository.save(well);
+        jobStartRepository.save(jobStart);
+        jobFinalRepository.save(jobFinal);
 
-        repositoryJobStart.save(jobStart);
-        System.out.println(jobStart);
-
-        System.out.println(jobFinal);
-        repositoryJobFinal.save(jobFinal);
-        System.out.println(jobFinal);
+        wellRepository.deleteAll();
 
         context.close();
     }

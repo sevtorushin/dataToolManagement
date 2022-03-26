@@ -33,7 +33,7 @@ public class JobFinal {
     @JoinColumn(name = "JOB_ID")
     private JobStart jobStart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "WELL_ID")
     private Well well;
 
