@@ -23,9 +23,6 @@ public class TbibaseApplication {
 
         ConfigurableApplicationContext context = SpringApplication.run(TbibaseApplication.class);
 
-        WellRepository wellRepository = context.getBean(WellRepository.class);
-        JobStartRepository jobStartRepository = context.getBean(JobStartRepository.class);
-        JobFinalRepository jobFinalRepository = context.getBean(JobFinalRepository.class);
         JobStartService jobStartService = context.getBean(JobStartService.class);
         JobFinalService jobFinalService = context.getBean(JobFinalService.class);
         WellService wellService = context.getBean(WellService.class);
@@ -34,11 +31,11 @@ public class TbibaseApplication {
         JobStart jobStart = jobStartService.createJob();
         JobFinal jobFinal = jobFinalService.createJob();
 
-        wellRepository.save(well);
-        jobStartRepository.save(jobStart);
-        jobFinalRepository.save(jobFinal);
+        wellService.save(well);
+        jobStartService.save(jobStart);
+        jobFinalService.save(jobFinal);
 
-        wellRepository.deleteAll();
+        wellService.delete(well);
 
         context.close();
     }

@@ -13,21 +13,25 @@ import java.sql.Time;
 @Service
 public class JobStartService {
 
-    private final WellRepository repositoryWell;
-    private final JobStartRepository repositoryJobStart;
+    private final WellRepository wellRepository;
+    private final JobStartRepository jobStartRepository;
 
     @Autowired
-    public JobStartService(WellRepository repositoryWell, JobStartRepository repositoryJobStart) {
-        this.repositoryWell = repositoryWell;
-        this.repositoryJobStart = repositoryJobStart;
+    public JobStartService(WellRepository wellRepository, JobStartRepository jobStartRepository) {
+        this.wellRepository = wellRepository;
+        this.jobStartRepository = jobStartRepository;
     }
 
     public JobStart createJob(){
-        Well well = repositoryWell.getById(1L);
+        Well well = wellRepository.getById(1L);
         JobStart jobStart = new JobStart(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
                 450, "operator1", well);
         jobStart.setJobNumber(1);
         return jobStart;
+    }
+
+    public void save(JobStart jobStart){
+        jobStartRepository.save(jobStart);
     }
 
 }
