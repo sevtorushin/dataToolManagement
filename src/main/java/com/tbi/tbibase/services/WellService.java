@@ -16,8 +16,8 @@ public class WellService {
     }
 
     public Well createWell(){
-        return new Well("field", "pad", "well", new Date(System.currentTimeMillis()),
-                new Time(System.currentTimeMillis()),"customer", "directory");
+        return new Well("URN", "U55", "5501", new Date(System.currentTimeMillis()),
+                new Time(System.currentTimeMillis()),"AO \"Arkticgaz\"", "E:\\Documents\\");
     }
 
     public void save(Well well){

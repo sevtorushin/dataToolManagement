@@ -10,13 +10,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.*;
 
 @Data
 @Entity
 @Table(name = "job_start")
 public class JobStart {
-
-
 
     @Id
     @GenericGenerator(name = "gen", strategy = "increment")
@@ -37,6 +36,12 @@ public class JobStart {
     @OneToOne(mappedBy = "jobStart", cascade = CascadeType.ALL)
     private JobFinal jobFinal;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "pipe_has_job_start",
+            joinColumns = @JoinColumn(name = "JOB_ID", referencedColumnName = "JOB_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PIPE_ID", referencedColumnName = "PIPE_ID"))
+    private Set<PipeSet> pipeSets = new HashSet<>();
+
     public JobStart() {
     }
 
@@ -56,5 +61,40 @@ public class JobStart {
 
     public void setJobNumber(int jobNumber) {
         this.jobNumber = jobNumber;
+    }
+
+    public void addPipe(PipeSet pipeSet) {
+        pipeSets.add(pipeSet);
+        pipeSet.getJobStarts().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "JobStart{" +
+                "id=" + id +
+                ", jobNumber=" + jobNumber +
+                ", startDateOfJob=" + startDateOfJob +
+                ", startTimeOfJob=" + startTimeOfJob +
+                ", startDepth=" + startDepth +
+                ", operator='" + operator + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        JobStart jobStart = (JobStart) o;
+        return id == jobStart.id &&
+                jobNumber == jobStart.jobNumber &&
+                startDepth == jobStart.startDepth &&
+                Objects.equals(startDateOfJob, jobStart.startDateOfJob) &&
+                Objects.equals(startTimeOfJob, jobStart.startTimeOfJob) &&
+                Objects.equals(operator, jobStart.operator);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, jobNumber, startDateOfJob, startTimeOfJob, startDepth, operator);
     }
 }

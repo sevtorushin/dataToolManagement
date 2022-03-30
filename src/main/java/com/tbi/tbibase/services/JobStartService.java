@@ -25,7 +25,7 @@ public class JobStartService {
     public JobStart createJob(){
         Well well = wellRepository.getById(1L);
         JobStart jobStart = new JobStart(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                450, "operator1", well);
+                450, "Вторушин С.Е.", well);
         jobStart.setJobNumber(1);
         return jobStart;
     }

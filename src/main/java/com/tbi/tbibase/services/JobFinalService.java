@@ -29,8 +29,8 @@ public class JobFinalService {
         Well well = wellRepository.getById(1L);
         JobStart jobStart = jobStartRepository.getById(1L);
         JobFinal jobFinal = new JobFinal(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                1500, new Time(System.currentTimeMillis()), "45-62", "1400-2950",
-                97, 49, "norm", jobStart, well);
+                1596, new Time(System.currentTimeMillis()), "45-62", "1400-2950",
+                97, 49, "норма", jobStart, well);
         return jobFinal;
     }
 
