@@ -2,8 +2,6 @@ package com.tbi.tbibase.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -12,7 +10,7 @@ import java.util.*;
 @Data
 @Entity
 @Table(name = "pipe_set")
-public class PipeSet {
+public class Pipe {
     @Id
     @GenericGenerator(name="gen", strategy="increment")
     @GeneratedValue(generator = "gen")
@@ -26,13 +24,13 @@ public class PipeSet {
     @JoinColumn(name = "NAME_ID")
     private PipeName pipeName;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "pipeSets")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "pipes")
     private Set<JobStart> jobStarts = new HashSet<>();
 
-    public PipeSet() {
+    public Pipe() {
     }
 
-    public PipeSet(String serialNumber, Time primaryWorkTime, String note, PipeName pipeName) {
+    public Pipe(String serialNumber, Time primaryWorkTime, String note, PipeName pipeName) {
         SerialNumber = serialNumber;
         PrimaryWorkTime = primaryWorkTime;
         Note = note;
@@ -61,11 +59,11 @@ public class PipeSet {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PipeSet pipeSet = (PipeSet) o;
-        return Objects.equals(id, pipeSet.id) &&
-                Objects.equals(SerialNumber, pipeSet.SerialNumber) &&
-                Objects.equals(PrimaryWorkTime, pipeSet.PrimaryWorkTime) &&
-                Objects.equals(Note, pipeSet.Note);
+        Pipe pipe = (Pipe) o;
+        return Objects.equals(id, pipe.id) &&
+                Objects.equals(SerialNumber, pipe.SerialNumber) &&
+                Objects.equals(PrimaryWorkTime, pipe.PrimaryWorkTime) &&
+                Objects.equals(Note, pipe.Note);
     }
 
     @Override

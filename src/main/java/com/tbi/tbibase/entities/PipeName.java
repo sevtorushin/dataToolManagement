@@ -19,7 +19,7 @@ public class PipeName {
     private String Name;
 
     @OneToMany(mappedBy = "pipeName", cascade = CascadeType.REFRESH, orphanRemoval = true)
-    private List<PipeSet> pipeSets = new ArrayList<>();
+    private List<Pipe> pipes = new ArrayList<>();
 
     public PipeName() {
     }

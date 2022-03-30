@@ -1,11 +1,7 @@
 package com.tbi.tbibase.entities;
 
-import com.tbi.tbibase.repository.WellRepository;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.tbi.tbibase.repository.WellRepository;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -40,7 +36,7 @@ public class JobStart {
     @JoinTable(name = "pipe_has_job_start",
             joinColumns = @JoinColumn(name = "JOB_ID", referencedColumnName = "JOB_ID"),
             inverseJoinColumns = @JoinColumn(name = "PIPE_ID", referencedColumnName = "PIPE_ID"))
-    private Set<PipeSet> pipeSets = new HashSet<>();
+    private Set<Pipe> pipes = new HashSet<>();
 
     public JobStart() {
     }
@@ -63,9 +59,9 @@ public class JobStart {
         this.jobNumber = jobNumber;
     }
 
-    public void addPipe(PipeSet pipeSet) {
-        pipeSets.add(pipeSet);
-        pipeSet.getJobStarts().add(this);
+    public void addPipe(Pipe pipe) {
+        pipes.add(pipe);
+        pipe.getJobStarts().add(this);
     }
 
     @Override

@@ -11,12 +11,13 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "wells")
 public class Well {
 
     @Id
     @GenericGenerator(name = "gen", strategy = "increment")
     @GeneratedValue(generator = "gen")
-    @Column(name = "WELL_ID", nullable = false, unique = true)
+    @Column(name = "WELL_ID", nullable = false, unique = true, table = "wells")
     protected long id;
     private String field;
     private String pad;

@@ -1,16 +1,12 @@
 package com.tbi.tbibase;
 
 import com.tbi.tbibase.entities.*;
-import com.tbi.tbibase.repository.JobFinalRepository;
-import com.tbi.tbibase.repository.JobStartRepository;
-import com.tbi.tbibase.repository.WellRepository;
 import com.tbi.tbibase.services.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.util.Optional;
 
 @SpringBootApplication
 public class TbibaseApplication {
@@ -19,26 +15,33 @@ public class TbibaseApplication {
 
         ConfigurableApplicationContext context = SpringApplication.run(TbibaseApplication.class);
 
-//        WellService wellService = context.getBean(WellService.class);
+        WellService wellService = context.getBean(WellService.class);
         JobStartService jobStartService = context.getBean(JobStartService.class);
 //        JobFinalService jobFinalService = context.getBean(JobFinalService.class);
-        PipeSetService pipeSetService = context.getBean(PipeSetService.class);
+        PipeService pipeService = context.getBean(PipeService.class);
 
 //        Well well = wellService.createWell();
-        JobStart jobStart = jobStartService.createJob();
+//        JobStart jobStart = jobStartService.createJob();
+        Optional<JobStart> jobStartOptional = jobStartService.getById(3L);
+        JobStart jobStart = jobStartOptional.get();
+
+        Pipe pipe1 = pipeService.getById(1L).get();
+        Pipe pipe2 = pipeService.getById(6L).get();
+        Pipe pipe3 = pipeService.getById(7L).get();
+        Pipe pipe4 = pipeService.getById(8L).get();
 //        JobFinal jobFinal = jobFinalService.createJob();
-        PipeSet pipeSet1 = pipeSetService.createPipeSet(2L, "1475");
-        pipeSetService.save(pipeSet1);
-        jobStart.addPipe(pipeSet1);
-        PipeSet pipeSet2 = pipeSetService.createPipeSet(4L, "84516-03");
-        pipeSetService.save(pipeSet2);
-        jobStart.addPipe(pipeSet2);
-        PipeSet pipeSet3 = pipeSetService.createPipeSet(4L, "84516-01");
-        pipeSetService.save(pipeSet3);
-        jobStart.addPipe(pipeSet3);
-        PipeSet pipeSet4 = pipeSetService.createPipeSet(5L, "1768-9");
-        pipeSetService.save(pipeSet4);
-        jobStart.addPipe(pipeSet4);
+//        Pipe pipe1 = pipeService.createPipeSet(1L, "1475");
+//        pipeService.save(pipe1);
+        jobStart.addPipe(pipe1);
+//        Pipe pipe2 = pipeService.createPipeSet(4L, "84516-03");
+//        pipeService.save(pipe2);
+        jobStart.addPipe(pipe2);
+//        Pipe pipe3 = pipeService.createPipeSet(4L, "84516-01");
+//        pipeService.save(pipe3);
+        jobStart.addPipe(pipe3);
+//        Pipe pipe4 = pipeService.createPipeSet(5L, "1768-9");
+//        pipeService.save(pipe4);
+        jobStart.addPipe(pipe4);
 
 //        wellService.save(well);
         jobStartService.save(jobStart);

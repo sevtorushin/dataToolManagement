@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Optional;
 
 @Service
 public class JobStartService {
@@ -23,7 +24,7 @@ public class JobStartService {
     }
 
     public JobStart createJob(){
-        Well well = wellRepository.getById(1L);
+        Well well = wellRepository.getById(2L);
         JobStart jobStart = new JobStart(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
                 450, "Вторушин С.Е.", well);
         jobStart.setJobNumber(1);
@@ -34,4 +35,7 @@ public class JobStartService {
         jobStartRepository.save(jobStart);
     }
 
+    public Optional<JobStart> getById(long id){
+        return jobStartRepository.findById(id);
+    }
 }
