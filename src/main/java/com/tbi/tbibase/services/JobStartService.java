@@ -24,10 +24,10 @@ public class JobStartService {
     }
 
     public JobStart createJob(){
-        Well well = wellRepository.getById(2L);
+        Well well = wellRepository.getById(1L);
         JobStart jobStart = new JobStart(new Date(System.currentTimeMillis()), new Time(System.currentTimeMillis()),
-                450, "Вторушин С.Е.", well);
-        jobStart.setJobNumber(1);
+                456, "Вторушин С.Е.", well);
+        jobStart.setJobNumber(2);
         return jobStart;
     }
 
@@ -37,5 +37,9 @@ public class JobStartService {
 
     public Optional<JobStart> getById(long id){
         return jobStartRepository.findById(id);
+    }
+
+    public void delete(JobStart jobStart){
+        jobStartRepository.delete(jobStart);
     }
 }

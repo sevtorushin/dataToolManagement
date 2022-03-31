@@ -16,9 +16,9 @@ public class Pipe {
     @GeneratedValue(generator = "gen")
     @Column(name = "PIPE_ID", nullable = false, table = "pipe_set")
     private Long id;
-    private String SerialNumber;
-    private Time PrimaryWorkTime;
-    private String Note;
+    private String serialNumber;
+    private Time primaryWorkTime;
+    private String note;
 
     @ManyToOne
     @JoinColumn(name = "NAME_ID")
@@ -31,9 +31,9 @@ public class Pipe {
     }
 
     public Pipe(String serialNumber, Time primaryWorkTime, String note, PipeName pipeName) {
-        SerialNumber = serialNumber;
-        PrimaryWorkTime = primaryWorkTime;
-        Note = note;
+        this.serialNumber = serialNumber;
+        this.primaryWorkTime = primaryWorkTime;
+        this.note = note;
         this.pipeName = pipeName;
     }
 
@@ -49,9 +49,9 @@ public class Pipe {
     public String toString() {
         return "PipeSet{" +
                 "id=" + id +
-                ", SerialNumber='" + SerialNumber + '\'' +
-                ", PrimaryWorkTime=" + PrimaryWorkTime +
-                ", Note='" + Note + '\'' +
+                ", SerialNumber='" + serialNumber + '\'' +
+                ", PrimaryWorkTime=" + primaryWorkTime +
+                ", Note='" + note + '\'' +
                 '}';
     }
 
@@ -61,13 +61,13 @@ public class Pipe {
         if (o == null || getClass() != o.getClass()) return false;
         Pipe pipe = (Pipe) o;
         return Objects.equals(id, pipe.id) &&
-                Objects.equals(SerialNumber, pipe.SerialNumber) &&
-                Objects.equals(PrimaryWorkTime, pipe.PrimaryWorkTime) &&
-                Objects.equals(Note, pipe.Note);
+                Objects.equals(serialNumber, pipe.serialNumber) &&
+                Objects.equals(primaryWorkTime, pipe.primaryWorkTime) &&
+                Objects.equals(note, pipe.note);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, SerialNumber, PrimaryWorkTime, Note);
+        return Objects.hash(id, serialNumber, primaryWorkTime, note);
     }
 }

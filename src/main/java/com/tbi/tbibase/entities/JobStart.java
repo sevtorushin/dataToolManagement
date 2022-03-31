@@ -64,6 +64,11 @@ public class JobStart {
         pipe.getJobStarts().add(this);
     }
 
+    public void remove(Pipe pipe){
+        pipes.remove(pipe);
+        pipe.getJobStarts().remove(this);
+    }
+
     @Override
     public String toString() {
         return "JobStart{" +

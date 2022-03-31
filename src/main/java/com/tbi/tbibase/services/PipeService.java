@@ -36,4 +36,8 @@ public class PipeService {
     public Optional<Pipe> getById (long id){
         return pipeRepository.findById(id);
     }
+
+    public void deleteAll(){
+        pipeNameRepository.deleteAll();
+    }
 }

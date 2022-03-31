@@ -16,15 +16,15 @@ public class PipeName {
     @GeneratedValue(generator = "gen")
     @Column(name = "NAME_ID", nullable = false, table = "pipe_name")
     private Long id;
-    private String Name;
+    private String name;
 
-    @OneToMany(mappedBy = "pipeName", cascade = CascadeType.REFRESH, orphanRemoval = true)
+    @OneToMany(mappedBy = "pipeName", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pipe> pipes = new ArrayList<>();
 
     public PipeName() {
     }
 
     public PipeName(String name) {
-        Name = name;
+        this.name = name;
     }
 }
