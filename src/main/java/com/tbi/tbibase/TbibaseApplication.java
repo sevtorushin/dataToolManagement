@@ -6,6 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -15,15 +17,15 @@ public class TbibaseApplication {
 
         ConfigurableApplicationContext context = SpringApplication.run(TbibaseApplication.class);
 
-        WellService wellService = context.getBean(WellService.class);
-        JobStartService jobStartService = context.getBean(JobStartService.class);
+//        WellService wellService = context.getBean(WellService.class);
+//        JobStartService jobStartService = context.getBean(JobStartService.class);
 //        JobFinalService jobFinalService = context.getBean(JobFinalService.class);
-        PipeService pipeService = context.getBean(PipeService.class);
+//        PipeService pipeService = context.getBean(PipeService.class);
 
 //        Well well = wellService.createWell();
 //        JobStart jobStart = jobStartService.createJob();
-        Optional<JobStart> jobStartOptional = jobStartService.getById(5L);
-        JobStart jobStart = jobStartOptional.get();
+//        Optional<JobStart> jobStartOptional = jobStartService.getById(5L);
+//        JobStart jobStart = jobStartOptional.get();
 //
 //        Pipe pipe1 = pipeService.getById(5L).get();
 //        Pipe pipe2 = pipeService.getById(10L).get();
@@ -54,11 +56,11 @@ public class TbibaseApplication {
 //        jobStartService.delete(jobStartService.getById(3L).get());
 //        wellService.save(well);
 //        jobStartService.save(jobStart);
-        jobStartService.delete(jobStart);
+//        jobStartService.delete(jobStart);
 //        jobFinalService.save(jobFinal);
 //        wellService.delete(well);
 
-        context.close();
+//        context.close();
     }
 
 }

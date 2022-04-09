@@ -2,10 +2,9 @@ package com.tbi.tbibase.entities;
 
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.*;
 
 @Data
@@ -20,8 +19,12 @@ public class JobStart {
     protected long id;
 
     private int jobNumber;
-    private Date startDateOfJob;
-    private Time startTimeOfJob;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private java.util.Date startDateOfJob;
+    @DateTimeFormat(pattern = "HH:mm")
+    @Temporal(TemporalType.TIME)
+    private java.util.Date startTimeOfJob;
     private int startDepth;
     private String operator;
 
@@ -41,7 +44,7 @@ public class JobStart {
     public JobStart() {
     }
 
-    public JobStart(Date startDateOfJob, Time startTimeOfJob,
+    public JobStart(Date startDateOfJob, Date startTimeOfJob,
                     int startDepth, String operator, Well well) {
         this.startDateOfJob = startDateOfJob;
         this.startTimeOfJob = startTimeOfJob;
@@ -57,6 +60,46 @@ public class JobStart {
 
     public void setJobNumber(int jobNumber) {
         this.jobNumber = jobNumber;
+    }
+
+    public Date getStartDateOfJob() {
+        return startDateOfJob;
+    }
+
+    public void setStartDateOfJob(Date startDateOfJob) {
+        this.startDateOfJob = startDateOfJob;
+    }
+
+    public Date getStartTimeOfJob() {
+        return startTimeOfJob;
+    }
+
+    public void setStartTimeOfJob(Date startTimeOfJob) {
+        this.startTimeOfJob = startTimeOfJob;
+    }
+
+    public int getStartDepth() {
+        return startDepth;
+    }
+
+    public void setStartDepth(int startDepth) {
+        this.startDepth = startDepth;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
+    public Well getWell() {
+        return well;
+    }
+
+    public void setWell(Well well) {
+        this.well = well;
     }
 
     public void addPipe(Pipe pipe) {
