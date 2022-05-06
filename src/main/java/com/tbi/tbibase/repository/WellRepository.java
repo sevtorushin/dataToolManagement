@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface WellRepository extends JpaRepository<Well, Long> {
-    public Optional<Well> getWellByWell(String well);
+    public Optional<Well> getWellByWellNumber(String well);
 }

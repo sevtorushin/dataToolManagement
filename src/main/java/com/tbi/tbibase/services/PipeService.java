@@ -7,6 +7,7 @@ import com.tbi.tbibase.repository.PipeRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Time;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,6 +30,8 @@ public class PipeService {
         pipeRepository.save(pipe);
     }
 
+    public List<Pipe> getAll(){return pipeRepository.findAll();}
+
     public void delete(Pipe pipe){
         pipeRepository.delete(pipe);
     }
@@ -39,5 +42,9 @@ public class PipeService {
 
     public void deleteAll(){
         pipeNameRepository.deleteAll();
+    }
+
+    public List<Pipe> getPipeByPipeName(Long pipe_nameId){
+        return pipeRepository.getPipeByPipeName(pipeNameRepository.getById(pipe_nameId));
     }
 }

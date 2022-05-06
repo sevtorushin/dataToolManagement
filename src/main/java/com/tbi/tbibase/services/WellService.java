@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public class WellService {
-    private WellRepository wellRepository;
+    private final WellRepository wellRepository;
 
     public WellService(WellRepository wellRepository) {
         this.wellRepository = wellRepository;
@@ -26,7 +26,7 @@ public class WellService {
         return wellRepository.findById(id);
     }
 
-    public Optional<Well> getWellByWell(String well){
-        return wellRepository.getWellByWell(well);
+    public Optional<Well> getWellByWellNumber(String well){
+        return wellRepository.getWellByWellNumber(well);
     }
 }

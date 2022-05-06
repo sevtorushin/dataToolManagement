@@ -11,13 +11,16 @@ import java.util.Optional;
 public class JobStartService {
 
     private final JobStartRepository jobStartRepository;
+    private final WellService wellService;
 
     @Autowired
-    public JobStartService(JobStartRepository jobStartRepository) {
+    public JobStartService(JobStartRepository jobStartRepository, WellService wellService) {
         this.jobStartRepository = jobStartRepository;
+        this.wellService = wellService;
     }
 
-    public void save(JobStart jobStart){
+    public void save(JobStart jobStart, String wellNumber){
+        jobStart.setWell(wellService.getWellByWellNumber(wellNumber).get());
         jobStartRepository.save(jobStart);
     }
 
